@@ -1,17 +1,18 @@
 import prompt from 'prompt'
 import {exec} from 'child_process'
 import {writeFile} from 'fs'
-import pkgJson from 'pkg-json'
+
+const json = require('../package.json')
 
 const onErr = err => console.error(err)
 
-function logCmd (error) {
+function logCmd (error, stdin, stdout) {
   if (error !== null) {
     onErr(error)
   }
+  console.log(stdin)
+  console.log(stdout)
 }
-
-exec('rimraf ./.git', logCmd)
 
 process.stdin.resume()
 process.stdin.setEncoding('utf-8')
@@ -43,20 +44,43 @@ const properties = {
   }
 }
 
-const set = (field, value) => pkgJson({set: field, value})
+let githubUrl
 
 function handleResults ({packageName, description, fullName, githubUserName, email}) {
-  set('name', `@most/${packageName}`)
-  set('main', `dist/${packageName}.js`)
-  set('files', [`dist/${packageName}.js`])
-  set('scripts.build-dist', `mkdir -p dist && rollup src/index.js | babel --presets es2015 --plugins transform-es2015-modules-umd --module-id '@most/${packageName}' -o dist/${packageName}.js`)
-  set('scripts.build', `npm run build-dist && uglifyjs dist/${packageName}.js -o dist/${packageName}.min.js`)
-  const githubUrl = `https://github.com/${githubUserName}/${packageName}`
-  set('repository.url', `git+${githubUrl}.git`)
-  set('author', `${fullName} <${email}> (github.com/${githubUserName})`)
-  set('bugs.url', `${githubUrl}/issues`)
-  set('homepage', `${githubUrl}#readme`)
-  set('description', description)
+  githubUrl = `https://github.com/${githubUserName}/${packageName}`
+  writeFile('package.json',
+`{
+  "name": "@most/${packageName}",
+  "version": "0.0.0",
+  "description": "${description}",
+  "main": "dist/${packageName}.js",
+  "files": [
+    "dist/${packageName}.js"
+  ],
+  "scripts": {
+    "build-dist": "mkdir -p dist && rollup src/index.js | babel --presets es2015 --plugins transform-es2015-modules-umd --module-id '@most/${packageName}' -o dist/${packageName}.js",
+    "build": "npm run build-dist && uglifyjs dist/${packageName}.js -o dist/${packageName}.min.js",
+    "prepublish": "npm run build",
+    "preversion": "npm run build",
+    "unit-test": "babel-node ./node_modules/.bin/isparta cover _mocha",
+    "lint": "jsinspect src && jsinspect test && eslint src test",
+    "test": "npm run lint && npm run unit-test",
+    "start": "npm install && npm prune"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/${githubUserName}/${packageName}.git"
+  },
+  "author": "${fullName} <${email}> (github.com/${githubUserName})",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/${githubUserName}/${packageName}/issues"
+  },
+  "homepage": "https://github.com/${githubUserName}/${packageName}#readme",
+  "peerDependencies": ${JSON.stringify(json['peerDependencies'])},
+  "devDependencies": ${JSON.stringify(json['devDependencies'])}
+}
+`)
 
   writeFile('README.md',
 `# @most/${packageName}
@@ -67,18 +91,22 @@ ${description}
 
 #### ${packageName} ::
 `)
-
-  exec('git init', logCmd)
-  exec(`git remote add origin ${githubUrl}`, logCmd)
-  exec('git add .', logCmd)
-  exec('git commit -m "feat(): initial upload :fire:"')
-  exec('git tag -f v0.0.0')
-
-  console.log('git origin set to ' + githubUrl)
-  console.log('Set forth and create awesomeness!')
 }
 
 prompt.get({properties}, (err, results) => {
   if (err) { return onErr(err) }
   handleResults(results)
+  const work = new Promise(resolve => {
+    exec(`git remote add origin ${githubUrl}`, logCmd)
+    exec('git add .', logCmd)
+    exec('git commit -m "feat(): initial upload :fire:"')
+    exec('git tag -f v0.0.0')
+    setTimeout(resolve, 4000)
+  })
+
+  Promise.resolve(work)
+    .then(() => {
+      console.log('git origin set to ' + githubUrl)
+      console.log('Set forth and create awesomeness!')
+    })
 })

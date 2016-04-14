@@ -1,55 +1,53 @@
 {
-	"name": "@most/package-starter",
-	"version": "0.0.0",
-	"description": "A well-crafted starting place for mostjs packages.",
-	"main": "dist/package-starter.js",
-	"files": [
-		"dist/package-starter.js"
-	],
-	"scripts": {
-		"build-dist": "mkdir -p dist && rollup src/index.js | babel --presets es2015 --plugins transform-es2015-modules-umd --module-id '@most/package-starter' -o dist/package-starter.js",
-		"build": "npm run build-dist && uglifyjs dist/package-starter.js -o dist/package-starter.min.js",
-		"prepublish": "npm run build",
-		"preversion": "npm run build",
-		"unit-test": "babel-node ./node_modules/.bin/isparta cover _mocha",
-		"lint": "jsinspect src && jsinspect test && eslint src test",
-		"test": "npm run lint && npm run unit-test",
-		"start": "npm install && babel-node ./scripts/setup.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/mostjs/package-starter.git"
-	},
-	"author": "mostjs <you@whoever.com> (github.com/mostjs)",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/mostjs/package-starter/issues"
-	},
-	"homepage": "https://github.com/mostjs/package-starter#readme",
-	"peerDependencies": {
-		"most": "^0.18.8"
-	},
-	"devDependencies": {
-		"@most/eslint-config-most": "^1.0.2",
-		"assert": "^1.3.0",
-		"babel-cli": "^6.7.5",
-		"babel-core": "^6.7.6",
-		"babel-eslint": "^6.0.2",
-		"babel-plugin-transform-es2015-modules-umd": "^6.6.5",
-		"babel-preset-es2015": "^6.6.0",
-		"eslint": "^2.7.0",
-		"eslint-config-standard": "^5.1.0",
-		"eslint-plugin-promise": "^1.1.0",
-		"eslint-plugin-standard": "^1.3.2",
-		"isparta": "^4.0.0",
-		"jsinspect": "^0.8.0",
-		"mkdirp": "^0.5.1",
-		"mocha": "^2.4.5",
-		"most": "^0.18.8",
-		"pkg-json": "0.0.2",
-		"prompt": "^1.0.0",
-		"rimraf": "^2.5.2",
-		"rollup": "^0.25.8",
-		"uglify-js": "^2.6.2"
-	}
+  "name": "@most/package-starter",
+  "version": "0.0.0",
+  "description": "A well-crafted starting place for mostjs packages.",
+  "main": "dist/package-starter.js",
+  "files": [
+    "dist/package-starter.js"
+  ],
+  "scripts": {
+    "build-dist": "mkdir -p dist && rollup src/index.js | babel --presets es2015 --plugins transform-es2015-modules-umd --module-id '@most/package-starter' -o dist/package-starter.js",
+    "build": "npm run build-dist && uglifyjs dist/package-starter.js -o dist/package-starter.min.js",
+    "prepublish": "npm run build",
+    "preversion": "npm run build",
+    "unit-test": "babel-node ./node_modules/.bin/isparta cover _mocha",
+    "lint": "jsinspect src && jsinspect test && eslint src test",
+    "test": "npm run lint && npm run unit-test",
+    "start": "npm install && rimraf .git && git init && babel-node ./scripts/setup.js && npm install --save-dev most"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mostjs/package-starter.git"
+  },
+  "author": "mostjs <you@whoever.com> (github.com/mostjs)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mostjs/package-starter/issues"
+  },
+  "homepage": "https://github.com/mostjs/package-starter#readme",
+  "peerDependencies": {
+    "most": "^0.18.8"
+  },
+  "devDependencies": {
+    "@most/eslint-config-most": "^1.0.2",
+    "assert": "^1.3.0",
+    "babel-cli": "^6.7.5",
+    "babel-core": "^6.7.6",
+    "babel-eslint": "^6.0.2",
+    "babel-plugin-transform-es2015-modules-umd": "^6.6.5",
+    "babel-preset-es2015": "^6.6.0",
+    "eslint": "^2.7.0",
+    "eslint-config-standard": "^5.1.0",
+    "eslint-plugin-promise": "^1.1.0",
+    "eslint-plugin-standard": "^1.3.2",
+    "isparta": "^4.0.0",
+    "jsinspect": "^0.8.0",
+    "mkdirp": "^0.5.1",
+    "mocha": "^2.4.5",
+    "prompt": "^1.0.0",
+    "rimraf": "^2.5.2",
+    "rollup": "^0.25.8",
+    "uglify-js": "^2.6.2"
+  }
 }
