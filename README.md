@@ -15,7 +15,7 @@ $ cd my-awesome-package
 
 ```shell
 $ cd my-awesome-package
-$ npm start
+$ npm install
 ```
 
 Follow the prompts and then set forth and create a well-documented and

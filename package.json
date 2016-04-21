@@ -14,7 +14,7 @@
     "unit-test": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "lint": "jsinspect src && jsinspect test && eslint src test",
     "test": "npm run lint && npm run unit-test",
-    "start": "npm install && rimraf .git && git init && babel-node ./scripts/setup.js && npm install --save-dev most"
+    "postinstall": "npm install && rimraf .git && git init && babel-node ./scripts/setup.js && npm install --save-dev most"
   },
   "repository": {
     "type": "git",
