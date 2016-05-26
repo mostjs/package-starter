@@ -15,6 +15,12 @@ $ npm install
 $ sed -i 's/mostPackage/my-awesome-package/g' package.json
 ```
 
+or one-line install:
+
+```
+bash <(curl -sSL https://git.io/vr1HI)
+```
+
 ### Use it
 
 In your editor:
