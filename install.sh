@@ -12,7 +12,9 @@ git clone https://github.com/mostjs/package-starter $name \
 && cd $name \
 && rm -rf ./.git \
 && git init \
-&& sed -i -- "s/mostPackage/${name}/g" package.json \
+&& sed -i.bak "s/mostPackage/${name}/g" package.json \
+&& rm -rf package.json.bak \
+&& rm -rf install.sh \
 && npm install 
 
 printf "\e[32m[✔] Successfully installed ${name}\e[32m!\n"
