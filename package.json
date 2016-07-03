@@ -28,7 +28,7 @@
   "devDependencies": {
     "@most/eslint-config-most": "^1.0.2",
     "assert": "^1.4.1",
-    "babel-cli": "^6.9.0",
+    "babel-cli": "^6.10.1",
     "babel-core": "^6.10.4",
     "babel-eslint": "^6.1.0",
     "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
