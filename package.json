@@ -42,7 +42,7 @@
     "mocha": "^2.5.3",
     "most": "^0.19.7",
     "rollup": "^0.33.0",
-    "uglify-js": "^2.6.1"
+    "uglify-js": "^2.6.3"
   },
   "peerDependencies": {
     "most": "^0.19.7"
