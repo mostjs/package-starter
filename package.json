@@ -41,7 +41,7 @@
     "jsinspect": "^0.8.0",
     "mocha": "^2.5.3",
     "most": "^0.19.7",
-    "rollup": "^0.33.0",
+    "rollup": "^0.33.1",
     "uglify-js": "^2.7.0"
   },
   "peerDependencies": {
