@@ -38,7 +38,7 @@
   },
   "scripts": {
     "build": "npm run build-dist && uglifyjs dist/mostPackage.js -o dist/mostPackage.min.js",
-    "build-dist": "mkdir -p dist && rollup -c --name '@most/mostPackage' -o dist/mostPackage.js",
+    "build-dist": "mkdir -p dist && rollup -c --name 'mostPackage' -o dist/mostPackage.js",
     "lint": "jsinspect src && jsinspect test && eslint src test",
     "prepublish": "npm run build",
     "preversion": "npm run build",
