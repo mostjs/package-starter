@@ -31,7 +31,7 @@
   "license": "MIT",
   "main": "dist/mostPackage.js",
   "peerDependencies": {
-    "most": "^0.19.7"
+    "most": "^1.0.0"
   },
   "repository": {
     "type": "git",
