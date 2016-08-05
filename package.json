@@ -10,7 +10,7 @@
     "@most/eslint-config-most": "^1.0.2",
     "assert": "^1.4.1",
     "babel-eslint": "^6.1.2",
-    "buba": "^1.0.5",
+    "buba": "^1.0.6",
     "eslint": "^3.2.1",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.0",
