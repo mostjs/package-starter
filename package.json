@@ -7,7 +7,7 @@
     "url": "https://github.com/mostjs/mostPackage/issues"
   },
   "devDependencies": {
-    "@most/eslint-config-most": "^1.0.2",
+    "@most/eslint-config-most": "^1.0.3",
     "assert": "^1.4.1",
     "babel-eslint": "^6.1.2",
     "buba": "^2.0.2",
