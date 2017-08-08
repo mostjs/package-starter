@@ -24,7 +24,7 @@
     "uglify-js": "^3.0.14"
   },
   "files": [
-    "dist/mostPackage.js"
+    "dist"
   ],
   "homepage": "https://github.com/mostjs/mostPackage#readme",
   "keywords": [
