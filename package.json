@@ -15,21 +15,30 @@
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
-    "istanbul": "^1.1.0-alpha.1",
     "jsinspect": "^0.9.0",
     "mocha": "^3.4.2",
-    "most": "^1.4.0",
+    "most": "^1.5.1",
+    "nyc": "^11.1.0",
     "rollup": "^0.41.1",
     "rollup-plugin-buble": "^0.15.0",
-    "uglify-js": "^3.0.14",
-    "umd-name-transform": "^1.0.1"
+    "uglify-js": "^3.0.14"
   },
   "files": [
     "dist/mostPackage.js"
   ],
   "homepage": "https://github.com/mostjs/mostPackage#readme",
+  "keywords": [
+    "most",
+    "mostjs",
+    "reactive",
+    "event",
+    "async",
+    "stream"
+  ],
   "license": "MIT",
-  "main": "dist/mostPackage.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
   "peerDependencies": {
     "most": "^1.0.0"
   },
@@ -38,12 +47,12 @@
     "url": "git+https://github.com/mostjs/mostPackage.git"
   },
   "scripts": {
-    "build": "npm run build-dist && uglifyjs dist/mostPackage.js -o dist/mostPackage.min.js",
-    "build-dist": "mkdir -p dist && rollup -c --name '@most/mostPackage' | umd-name-transform -o dist/mostPackage.js",
-    "lint": "jsinspect src && jsinspect test && eslint src test",
+    "build": "npm run build:dist && uglifyjs dist/index.js -o dist/index.min.js",
+    "build:dist": "mkdir -p dist && rollup -c --name 'mostPackage'",
+    "test:lint": "jsinspect src && jsinspect test && eslint src test",
     "prepublish": "npm run build",
     "preversion": "npm run build",
-    "test": "npm run lint && npm run unit-test",
-    "unit-test": "istanbul cover _mocha"
+    "test": "npm run test:lint && npm run test:unit",
+    "test:unit": "nyc mocha -r buba/register"
   }
 }
