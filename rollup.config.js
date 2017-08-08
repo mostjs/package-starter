@@ -1,7 +1,20 @@
-import buble from 'rollup-plugin-buble';
+import buble from 'rollup-plugin-buble'
 
 export default {
   entry: 'src/index.js',
-  format: 'umd',
-  plugins: [ buble() ]
-};
+  plugins: [
+    buble()
+  ],
+  targets: [
+    {
+      dest: 'dist/index.js',
+      format: 'umd',
+      sourceMap: true
+    },
+    {
+      dest: 'dist/index.es.js',
+      format: 'es',
+      sourceMap: true
+    }
+  ]
+}
